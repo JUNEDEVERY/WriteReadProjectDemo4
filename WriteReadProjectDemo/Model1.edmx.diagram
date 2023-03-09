@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cc6864b0cba94a1fa396c66bce3bf563" Name="Diagram1">
+        <EntityTypeShape EntityType="practic3Model.edIzm" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="practic3Model.manufacture" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="practic3Model.Order" Width="1.5" PointX="3" PointY="15.625" />
+        <EntityTypeShape EntityType="practic3Model.OrderProduct" Width="1.5" PointX="5.25" PointY="2.25" />
+        <EntityTypeShape EntityType="practic3Model.Point" Width="1.5" PointX="0.75" PointY="13.125" />
+        <EntityTypeShape EntityType="practic3Model.Product" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="practic3Model.ProductCategory" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="practic3Model.Role" Width="1.5" PointX="1.5" PointY="19.625" />
+        <EntityTypeShape EntityType="practic3Model.status" Width="1.5" PointX="0.75" PointY="22.625" />
+        <EntityTypeShape EntityType="practic3Model.supplier" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="practic3Model.User" Width="1.5" PointX="0.75" PointY="16.125" />
+        <AssociationConnector Association="practic3Model.FK_Product_edIzm" />
+        <AssociationConnector Association="practic3Model.FK_Product_manufacture" />
+        <AssociationConnector Association="practic3Model.FK__OrderProd__Order__403A8C7D" />
+        <AssociationConnector Association="practic3Model.FK_Order_Point" />
+        <AssociationConnector Association="practic3Model.FK_Order_status" />
+        <AssociationConnector Association="practic3Model.FK_Order_User" />
+        <AssociationConnector Association="practic3Model.FK__OrderProd__Produ__412EB0B6" />
+        <AssociationConnector Association="practic3Model.FK_Product_ProductCategory" />
+        <AssociationConnector Association="practic3Model.FK_Product_supplier" />
+        <AssociationConnector Association="practic3Model.FK__User__UserRole__398D8EEE" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
