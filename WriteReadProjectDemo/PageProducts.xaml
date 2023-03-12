@@ -17,6 +17,7 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        <Button Content="Все заказы" Click="Button_Click" Grid.Row="2"/>
         <Button Visibility="Collapsed" Content="Просмотр заказа" Name="btnOrder" Click="btnOrder_Click" Grid.Row="2" HorizontalAlignment="Center" Height="50"></Button>
         <StackPanel Grid.Row="0" Margin="25 0 0 0" Orientation="Horizontal">
             <TextBlock x:Name="tblast" Loaded="tblast_Loaded"/>

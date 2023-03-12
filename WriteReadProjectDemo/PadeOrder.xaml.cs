@@ -20,6 +20,7 @@ namespace WriteReadProjectDemo
     /// </summary>
     public partial class PadeOrder : Page
     {
+       public static  List<OrderProduct> orderProducts = db.tbe.OrderProduct.ToList();
         public PadeOrder()
         {
             InitializeComponent();

@@ -24,6 +24,7 @@ namespace WriteReadProjectDemo
     {
          User user;
         public static bool isGuest;
+      
         Product product1 = new Product();
         public PageProducts(User user)
         {
@@ -225,6 +226,11 @@ namespace WriteReadProjectDemo
         private void btnCHangeOrder_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EditedOrder());
         }
     }
 }
