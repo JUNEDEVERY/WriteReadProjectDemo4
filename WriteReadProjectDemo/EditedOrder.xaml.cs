@@ -45,7 +45,7 @@ namespace WriteReadProjectDemo
         {
             Border border = sender as Border;
             int id = Convert.ToInt32(border.Uid);
-          
+
             List<OrderProduct> orderProduct = db.tbe.OrderProduct.Where(x => x.OrderID == id).ToList();
             foreach (var item in orderProduct)
             {
@@ -73,7 +73,7 @@ namespace WriteReadProjectDemo
             {
                 SolidColorBrush scb1 = (SolidColorBrush)new BrushConverter().ConvertFromString("#ff8c00");
                 lvOrderEdited.Background = scb1;
-             
+
             }
         }
         private void tbSostavZakaza_Loaded_1(object sender, RoutedEventArgs e)
@@ -112,9 +112,11 @@ namespace WriteReadProjectDemo
 
 
             }
+            orderFIltresSumm = summa;
             textBlock.Text = Convert.ToString(summa);
         }
 
+        public static int orderFIltresSumm;
         private void tbAllSale_Loaded(object sender, RoutedEventArgs e)
         {
             double summa = 0;
@@ -175,5 +177,104 @@ namespace WriteReadProjectDemo
 
         }
 
+        private void btnChangeOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int id = Convert.ToInt32(button.Uid);
+            Order order = db.tbe.Order.FirstOrDefault(x => x.OrderID == id);
+            WindowChangeOrderADM orderADM = new WindowChangeOrderADM(order);
+            orderADM.Show();
+            orderADM.Closing += (obj, args) =>
+            {
+                NavigationService.Navigate(new EditedOrder());
+
+            };
+            //NavigationService.Navigate(new WindowChangeOrderADM(order));
+
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+        public void filtres()
+        {
+            List<Product> product = db.tbe.Product.ToList();
+            if (cmbFiltres.SelectedItem != null)
+            {
+                //orderFIltresSumm
+                if (cmbFiltres != null)
+                {
+                    ComboBoxItem cmb = (ComboBoxItem)cmbFiltres.SelectedItem;
+                    switch (cmb.Content)
+                    {
+                        case "Все диапазоны":
+                            {
+                                product = product.Where(x => x.ProductDiscountAmount >= 0 && x.ProductDiscountAmount <= 10).ToList();
+
+                                break;
+                            }
+                        case "0-10%":
+                            {
+                                product = product.Where(x => x.ProductDiscountAmount >= 0 && x.ProductDiscountAmount <= 10).ToList();
+
+                                break;
+                            }
+                        case "11-14%":
+                            {
+                                product = product.Where(x => x.ProductDiscountAmount >= 11 && x.ProductDiscountAmount <= 14).ToList();
+
+                                break;
+                            }
+                        case "15% и более":
+                            {
+                                product = product.Where(x => x.ProductDiscountAmount > 15).ToList();
+
+                                break;
+                            }
+
+                    }
+                }
+                if (cmbSorted != null)
+                {
+                    if (cmbSorted.SelectedValue != null)
+                    {
+                        ComboBoxItem cmb = (ComboBoxItem)cmbSorted.SelectedItem;
+                        switch (cmb.Content)
+                        {
+                            case "По умолчанию":
+                                {
+                                    product = product.Where(x => x.ProductDiscountAmount >= 0 && x.ProductDiscountAmount <= 10).ToList();
+
+                                    break;
+                                }
+                            case "По возрастанию":
+                                {
+                                    product = product.Where(x => x.ProductDiscountAmount >= 0 && x.ProductDiscountAmount <= 10).ToList();
+
+                                    break;
+                                }
+                            case "По убыванию":
+                                {
+                                    product = product.Where(x => x.ProductDiscountAmount >= 0 && x.ProductDiscountAmount <= 10).ToList();
+
+                                    break;
+                                }
+                        }
+                    }
+                }
+            }
+
+
+        }
+        private void cmbSorted_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnOutFiltres_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

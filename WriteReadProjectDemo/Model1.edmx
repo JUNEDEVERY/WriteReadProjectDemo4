@@ -82,12 +82,12 @@
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityType Name="status">
+        <EntityType Name="statusChange">
           <Key>
             <PropertyRef Name="idStatus" />
           </Key>
           <Property Name="idStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="statusName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="supplier">
           <Key>
@@ -157,10 +157,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_status">
-          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="statusChange" Type="Self.statusChange" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="status">
+            <Principal Role="statusChange">
               <PropertyRef Name="idStatus" />
             </Principal>
             <Dependent Role="Order">
@@ -237,7 +237,7 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statusChange" EntityType="Self.statusChange" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__OrderProd__Order__403A8C7D" Association="Self.FK__OrderProd__Order__403A8C7D">
@@ -257,7 +257,7 @@
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_status" Association="Self.FK_Order_status">
-            <End Role="status" EntitySet="status" />
+            <End Role="statusChange" EntitySet="statusChange" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
@@ -294,7 +294,7 @@
           <EntitySet Name="Product" EntityType="practic3Model.Product" />
           <EntitySet Name="ProductCategory" EntityType="practic3Model.ProductCategory" />
           <EntitySet Name="Role" EntityType="practic3Model.Role" />
-          <EntitySet Name="status" EntityType="practic3Model.status" />
+          <EntitySet Name="statusChange" EntityType="practic3Model.statusChange" />
           <EntitySet Name="supplier" EntityType="practic3Model.supplier" />
           <EntitySet Name="User" EntityType="practic3Model.User" />
           <AssociationSet Name="FK_Product_edIzm" Association="practic3Model.FK_Product_edIzm">
@@ -314,7 +314,7 @@
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_status" Association="practic3Model.FK_Order_status">
-            <End Role="status" EntitySet="status" />
+            <End Role="statusChange" EntitySet="statusChange" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="practic3Model.FK_Order_User">
@@ -367,7 +367,7 @@
           <Property Name="OrderDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="OrderProduct" Relationship="practic3Model.FK__OrderProd__Order__403A8C7D" FromRole="Order" ToRole="OrderProduct" />
           <NavigationProperty Name="Point" Relationship="practic3Model.FK_Order_Point" FromRole="Order" ToRole="Point" />
-          <NavigationProperty Name="status" Relationship="practic3Model.FK_Order_status" FromRole="Order" ToRole="status" />
+          <NavigationProperty Name="statusChange" Relationship="practic3Model.FK_Order_status" FromRole="Order" ToRole="statusChange" />
           <NavigationProperty Name="User" Relationship="practic3Model.FK_Order_User" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="OrderProduct">
@@ -431,13 +431,13 @@
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="practic3Model.FK__User__UserRole__398D8EEE" FromRole="Role" ToRole="User" />
         </EntityType>
-        <EntityType Name="status">
+        <EntityType Name="statusChange">
           <Key>
             <PropertyRef Name="idStatus" />
           </Key>
           <Property Name="idStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="status1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Order" Relationship="practic3Model.FK_Order_status" FromRole="status" ToRole="Order" />
+          <Property Name="statusName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="practic3Model.FK_Order_status" FromRole="statusChange" ToRole="Order" />
         </EntityType>
         <EntityType Name="supplier">
           <Key>
@@ -510,10 +510,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_status">
-          <End Type="practic3Model.status" Role="status" Multiplicity="1" />
+          <End Type="practic3Model.statusChange" Role="statusChange" Multiplicity="1" />
           <End Type="practic3Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="status">
+            <Principal Role="statusChange">
               <PropertyRef Name="idStatus" />
             </Principal>
             <Dependent Role="Order">
@@ -581,7 +581,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -671,10 +671,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="status">
-            <EntityTypeMapping TypeName="practic3Model.status">
-              <MappingFragment StoreEntitySet="status">
-                <ScalarProperty Name="status1" ColumnName="status" />
+          <EntitySetMapping Name="statusChange">
+            <EntityTypeMapping TypeName="practic3Model.statusChange">
+              <MappingFragment StoreEntitySet="statusChange">
+                <ScalarProperty Name="statusName" ColumnName="statusName" />
                 <ScalarProperty Name="idStatus" ColumnName="idStatus" />
               </MappingFragment>
             </EntityTypeMapping>

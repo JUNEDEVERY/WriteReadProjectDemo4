@@ -19,9 +19,9 @@
         <StackPanel Grid.Row="1">
 
 
-            <StackPanel Grid.Row="0">
+            <StackPanel Grid.Row="0" Margin="0 15 0 0">
 
-                <ListView Name="lvOrderEdited" Width="750" Height="350" Loaded="lvOrderEdited_Loaded_1" >
+                <ListView Name="lvOrderEdited" Width="750" Height="300" Loaded="lvOrderEdited_Loaded_1" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -30,25 +30,32 @@
                                     <RowDefinition Height="*"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
                                 <Border x:Name="border" Loaded="border_Loaded" Uid="{Binding OrderID}">
                                    
-
-                                    <StackPanel>
-                                        <StackPanel Grid.Row="0">
-                                            <TextBlock Text="{Binding OrderID}"></TextBlock>
-                                            <TextBlock TextWrapping="Wrap" Name="tbSostavZakaza" Uid="{Binding OrderID}" Loaded="tbSostavZakaza_Loaded_1"></TextBlock>
+        
+                                    <StackPanel >
+                                        <StackPanel Grid.Row="0" Grid.Column="0">
+                                            <StackPanel >
+                                                <TextBlock Text="{Binding OrderID}"></TextBlock>
+                                                <TextBlock TextWrapping="Wrap" Name="tbSostavZakaza" Uid="{Binding OrderID}" Loaded="tbSostavZakaza_Loaded_1"></TextBlock>
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding OrderDate,  StringFormat={}{0:dd MMMM yyyy}, ConverterCulture=ru}"></TextBlock>
+                                                <TextBlock Text="{Binding OrderDeliveryDate, StringFormat={}{0:dd MMMM yyyy}, ConverterCulture=ru}"></TextBlock>
+                                            </StackPanel>
                                         </StackPanel>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding OrderDate,  StringFormat={}{0:dd MMMM yyyy}, ConverterCulture=ru}"></TextBlock>
-                                            <TextBlock Text="{Binding OrderDeliveryDate, StringFormat={}{0:dd MMMM yyyy}, ConverterCulture=ru}"></TextBlock>
-                                        </StackPanel>
-
-
-
                                         <TextBlock Name="tbSummZakaza" Uid="{Binding OrderID}" Loaded="tbSummZakaza_Loaded"></TextBlock>
                                         <TextBlock Name="tbAllSale" Uid="{Binding OrderID}" Loaded="tbAllSale_Loaded"></TextBlock>
                                         <TextBlock Text="{Binding User.UserSurname}"></TextBlock>
+                                        <StackPanel Grid.Column="1">
+                                            <Button Name="btnChangeOrder" Content="Изменить детали заказа" Uid="{Binding OrderID}" Click="btnChangeOrder_Click"></Button>
+                                        </StackPanel>
                                     </StackPanel>
+                                   
                                 </Border>
                                
                               
@@ -62,5 +69,36 @@
             </StackPanel>
 
         </StackPanel>
+        <Grid Grid.Row="2">
+          
+           
+            <StackPanel HorizontalAlignment="Left" Height="50" Margin="25 25 0 0" Grid.Row="1">
+                <Button Content="Назад" Name="btnBack" Click="btnBack_Click"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Height="50">
+                <GroupBox Header="Сортировка заказа по стоимости">
+                    <ComboBox Name="cmbSorted" SelectionChanged="cmbSorted_SelectionChanged">
+                        <ComboBoxItem>По умолчанию</ComboBoxItem>
+                        <ComboBoxItem>По возрастанию</ComboBoxItem>
+                        <ComboBoxItem>По убыванию</ComboBoxItem>
+                    </ComboBox>
+                    
+                   
+
+                </GroupBox>
+                <GroupBox Header="Фильтрация заказа по скидке">
+                    <ComboBox Name="cmbFiltres" SelectionChanged="cmbSorted_SelectionChanged">
+                        <ComboBoxItem Content="Все диапазоны"/>
+                        <ComboBoxItem Content="0-10%"/>
+                        <ComboBoxItem Content="11-14%"/>
+                        <ComboBoxItem Content="15% и более"/>
+                    </ComboBox>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Height="50" Margin="0 25 25 0" Grid.Row="1">
+                <Button Content="Сброс фильтров" Name="btnOutFiltres" Click="btnOutFiltres_Click"/>
+            </StackPanel>
+        </Grid>
+       
     </Grid>
 </Page>
